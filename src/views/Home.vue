@@ -62,6 +62,12 @@ export default {
   box-sizing: border-box;
   .widgetsWrap {
     width: 220px;
+    li{
+      height: 28px;
+      line-height: 28px;
+      cursor:move;
+      border-bottom: 1px solid #ddddd6;
+    }
   }
   .widgetFormWrap {
     flex: 1;

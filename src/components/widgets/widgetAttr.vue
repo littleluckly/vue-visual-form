@@ -8,29 +8,10 @@
     <el-form-item label="字段名称">
       <el-input v-model="currSelectedWidget.name"></el-input>
     </el-form-item>
-    <el-form-item
-      label="默认值"
-      v-if="
-        Object.keys(currSelectedWidget.options).indexOf('defaultValue') >= 0 &&
-          currSelectedWidget.type !== 'checkbox'
-      "
-    >
-      <el-input v-model="currSelectedWidget.options.defaultValue"></el-input>
-    </el-form-item>
-    <el-form-item
-      label="占位内容"
-      v-if="Object.keys(currSelectedWidget.options).indexOf('placeholder') >= 0"
-    >
-      <el-input v-model="currSelectedWidget.options.placeholder"></el-input>
-    </el-form-item>
-    <el-form-item
-      label="选项"
-      v-if="
-        Object.keys(currSelectedWidget.options).indexOf('defaultValue') >= 0 &&
-          currSelectedWidget.type === 'checkbox'
-      "
-    >
-      <el-checkbox-group v-model="currSelectedWidget.options.defaultValue">
+     <el-form-item v-for="(widgetAttr,idx) in Object.keys(currSelectedWidget.options)" :key="idx"  :label="getAttr(widgetAttr)">
+        <el-input  v-if="widgetAttr === 'defaultValue' && currSelectedWidget.type !== 'checkbox'"  v-model="currSelectedWidget.options[widgetAttr]"></el-input>   
+        <el-input  v-if="widgetAttr === 'placeholder'"  v-model="currSelectedWidget.options[widgetAttr]"></el-input>  
+        <el-checkbox-group  v-if="widgetAttr === 'defaultValue' && currSelectedWidget.type === 'checkbox'"  v-model="currSelectedWidget.options[widgetAttr]">
         <draggable
           tag="ul"
           :list="currSelectedWidget.options.options"
@@ -78,7 +59,7 @@
           </li>
         </draggable>
       </el-checkbox-group>
-    </el-form-item>
+    </el-form-item> 
   </el-form>
 </template>
 
@@ -88,6 +69,17 @@ export default {
   props: ["currSelectedWidget"],
   components: {
     draggable,
+  },
+  methods: {
+      getAttr(widgetAttr) {
+          const attrNameMap = {
+              key:'字段标识',
+              name:'字段名称',
+              defaultValue:'默认值',
+              placeholder: '占位内容'
+          }
+          return attrNameMap[widgetAttr]
+      }
   },
 };
 </script>

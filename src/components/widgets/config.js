@@ -5,6 +5,7 @@ export const basicWidgets = [
     options: {
       defaultValue: "",
       placeholder: "",
+      tips: ""
     },
   },
   {

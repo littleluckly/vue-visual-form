@@ -53,13 +53,13 @@ export default {
       console.log("handleDraggableAdd", evt); //为拖拽到容器的元素添加唯一 key
       const key =
         this.selectedWidgetList.items[newIndex].type + "_" + Date.now();
-      this.$set(this.selectedWidgetList.items, newIndex, {
-        ...this.selectedWidgetList.items[newIndex],
-        options: {
-          ...this.selectedWidgetList.items[newIndex].options,
-        },
-        key,
-      });
+        this.$set(this.selectedWidgetList.items, newIndex, {
+          ...this.selectedWidgetList.items[newIndex],
+          options: {
+            ...this.selectedWidgetList.items[newIndex].options,
+          },
+          key,
+        });
     },
     handleSelectWidget(idx) {
       console.log("idx", idx);
